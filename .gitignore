@@ -1,0 +1,7 @@
+.idea/
+.idea/*
+libs/*
+out/*
+target/*
+*.iml
+testFiles/*
