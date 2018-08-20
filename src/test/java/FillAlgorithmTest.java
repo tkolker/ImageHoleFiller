@@ -1,10 +1,12 @@
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import java.util.ArrayList;
 
 public class FillAlgorithmTest {
 
-    private Image image4con = new Image(Inputs.values15);
-    private Image image8con = new Image(Inputs.values15);
+    private ArrayList<ArrayList<Float>> imageValues = Inputs.arrayToArrayList(Inputs.values15);
+    private Image image4con = new Image(imageValues);
+    private Image image8con = new Image(imageValues);
     private FillAlgorithm fillAlgorithm = new FillAlgorithm(new DefaultWeightFunction(0.2f, 2f));
     private HoleFiller holeFiller8con = new HoleFiller(image8con, fillAlgorithm, ePixelConnectivity.EIGHT);
     private HoleFiller holeFiller4con = new HoleFiller(image4con, fillAlgorithm, ePixelConnectivity.FOUR);

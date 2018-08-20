@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Inputs {
 
     static float[][] values1 = new float[][]{
@@ -6,31 +8,9 @@ public class Inputs {
             {0.1f, 0.1f, 0.1f},
     };
 
-    public static Pixel[][] expected4con1 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f), new Pixel(0,2,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f), new Pixel(1,2,0.1f)},
-            {new Pixel(2,0,0.1f), new Pixel(2,1,0.1f), new Pixel(2,2,0.1f)},
-    };
-
-    public static Pixel[][] expected8con1 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f), new Pixel(0,2,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f), new Pixel(1,2,0.1f)},
-            {new Pixel(2,0,0.1f), new Pixel(2,1,0.1f), new Pixel(2,2,0.1f)},
-    };
-
     static float[][] values2 = new float[][]{
             {-1f, 0.2f},
             {0.1f,0.1f},
-    };
-
-    public static Pixel[][] expected4con2 = new Pixel[][]{
-            {new Pixel(0,0,0.15f), new Pixel(0,1,0.2f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
-    public static Pixel[][] expected8con2 = new Pixel[][]{
-            {new Pixel(0,0,0.15f), new Pixel(0,1,0.2f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
     };
 
     static float[][] values3 = new float[][]{
@@ -38,44 +18,14 @@ public class Inputs {
             {0.1f,0.1f},
     };
 
-    public static Pixel[][] expected4con3 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
-    public static Pixel[][] expected8con3 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
     static float[][] values4 = new float[][]{
             {-1f, -1f},
             {0.1f,0.1f},
     };
 
-    public static Pixel[][] expected4con4 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
-    public static Pixel[][] expected8con4 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
     static float[][] values5 = new float[][]{
             {-1f, -1f},
             {0.1f,-1f},
-    };
-
-    public static Pixel[][] expected4con5 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
-    };
-
-    public static Pixel[][] expected8con5 = new Pixel[][]{
-            {new Pixel(0,0,0.1f), new Pixel(0,1,0.1f)},
-            {new Pixel(1,0,0.1f), new Pixel(1,1,0.1f)},
     };
 
     static float[][] values6 = new float[][]{
@@ -130,4 +80,18 @@ public class Inputs {
             {0.4f, -1f, -1f},
             {0.2f, 0.1f, -1f}
     };
+
+    static ArrayList<ArrayList<Float>> arrayToArrayList(float[][] valuesArr) {
+        ArrayList<ArrayList<Float>> valuesArrayList = new ArrayList<>();
+        ArrayList<Float> rowArrayList;
+        for(float[] rowArr : valuesArr){
+            rowArrayList = new ArrayList<>();
+            for(float valueArr : rowArr){
+                rowArrayList.add(valueArr);
+            }
+            valuesArrayList.add(rowArrayList);
+        }
+
+        return valuesArrayList;
+    }
 }

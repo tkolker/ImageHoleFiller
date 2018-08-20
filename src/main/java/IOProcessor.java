@@ -4,44 +4,45 @@ import java.util.Arrays;
 
 public class IOProcessor {
 
-    public static Image parseStringToImage(String filename) {
+    public static Image parseStringToImage(String filename) throws IOException {
         ArrayList<ArrayList<Float>> imageValues = new ArrayList<>();
         ArrayList<Float> arrayRow;
         String row;
-        String[] token;
+        String[] tokens;
+
+        BufferedReader reader = null;
 
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(filename));
+            reader = new BufferedReader(new FileReader(filename));
             reader.read();
             while ((row = reader.readLine()) != null) {
-                imageValues.add(arrayRow = new ArrayList<>());
-                token = row.substring(1, row.length() - 2).split(",");
-                for (String value : token) {
+                arrayRow = new ArrayList<>();
+                //parsing based on input format
+                tokens = row.substring(1, row.length() - 2).split(",");
+                for (String value : tokens) {
                     arrayRow.add(Float.parseFloat(value));
                 }
+                imageValues.add(arrayRow);
             }
-
+        }
+        finally {
             reader.close();
-
-        } catch(IOException e){
-            e.printStackTrace();
         }
 
         return new Image(imageValues);
     }
 
-    public static ePixelConnectivity parseStringToConnectivityType(int connectivity) {
+    public static ePixelConnectivity parseConnectivityType(int connectivity) {
         return ePixelConnectivity.getConnectivityType(connectivity);
     }
 
-    public static iWeightFunction parseStringToWeightFunction(String functionName, float eps, float z) {
-        if(functionName.equals(eWeightFunction.DEFAULT.toString()))
-            return new DefaultWeightFunction(eps, z);
+    public static iWeightFunction createWeightFunction(String functionName, float eps, float exponent) {
+        //Future: create different functions by function name
 
-        else return new DefaultWeightFunction(eps, z);
+        return new DefaultWeightFunction(eps, exponent);
     }
 
-    public static void generateOutput(Image image, String filepath) {
+    public static void generateOutput(Image image, String filepath) throws IOException {
         String filename = (new File(filepath)).getName();
 
         String imageValues = Arrays.deepToString(image.getValues());
@@ -54,12 +55,15 @@ public class IOProcessor {
         String newFilename = filenameWithoutSuffix + "_holeFilled." + suffix;
         String newFilePath = filepath.replace(filename, newFilename);
 
+        BufferedWriter writer = null;
+
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(newFilePath));
+            writer = new BufferedWriter(new FileWriter(newFilePath));
             writer.write(imageValues);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        finally {
+            writer.close();
+        }
+
     }
 }

@@ -14,13 +14,13 @@ public class FillAlgorithm {
     }
 
     private float fillPixel(Pixel holePixel, ArrayList<Pixel> boundaries){
-        float temp;
+        float weight;
         float boundariesWeightsSum = 0;
         float boundariesWeightsMul = 0;
         for(Pixel boundaryPixel : boundaries){
-            temp = m_WeightFunction.weight(boundaryPixel, holePixel);
-            boundariesWeightsSum += temp;
-            boundariesWeightsMul +=  temp * boundaryPixel.getValue();
+            weight = m_WeightFunction.weight(boundaryPixel, holePixel);
+            boundariesWeightsSum += weight;
+            boundariesWeightsMul +=  weight * boundaryPixel.getValue();
         }
 
         return boundariesWeightsMul / boundariesWeightsSum;

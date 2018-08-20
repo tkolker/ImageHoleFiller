@@ -6,7 +6,7 @@ public class DefaultWeightFunction implements iWeightFunction{
 
     public DefaultWeightFunction(float epsilon, float exponent){
         if(epsilon == 0)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Illegal epsilon value: 0");
 
         this.m_Epsilon = epsilon;
         this.m_Exponent = exponent;
@@ -15,6 +15,7 @@ public class DefaultWeightFunction implements iWeightFunction{
     @Override
     public float weight(Pixel boundaryPixel, Pixel holePixel) {
         double sqrDistance = getSqrDistance(boundaryPixel, holePixel);
+        //down cast from double to float
         return (float)(1 / (Math.pow(sqrDistance, m_Exponent / 2) + m_Epsilon));
     }
 

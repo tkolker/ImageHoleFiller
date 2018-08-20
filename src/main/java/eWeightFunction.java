@@ -1,14 +1,14 @@
 public enum eWeightFunction {
     DEFAULT("DefaultWeightFunction");
 
-    private final String value;
+    private final String m_Value;
 
      eWeightFunction(String value){
-        this.value = value;
+        this.m_Value = value;
     }
 
     @Override
     public String toString() {
-        return value;
+        return m_Value;
     }
 }
