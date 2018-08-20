@@ -3,7 +3,7 @@ ImageHoleFiller by Tal Kolker
 ASSUMPTIONS about the assignment:
 - Image where all values are -1 is an invalid input
 - Empty image is an invalid input
-- Weight function with 0 as epsilon in an invalid input
+- Weight function with 0 as epsilon is an invalid input
 - Image with at least one boundary pixel is a valid input
 - Input is given as a text file in this format:
 
@@ -27,19 +27,25 @@ For example:
 	[0.4f, -1f, -1f],
 	[0.2f, 0.1f, -1f]]
 	
+ - Output is a file containing the new 2D array located in the same library as the origin file.
+   The new file name is: origin file name + "_holeFilled".
+	
 
 USAGE:
  java -jar ImageHoleFiller.jar <image_file_path> <connectivity_type> <weight_function> <epsilon> <exponent>
 	
 	Parameters (must be in the specified order, all mandatory):
 	1. image_file_path : Image file path
-	2. connectivity_type : Pixel connectivity type
-	3. weight_function : Weight function for fill algorithm (for "DefaultWeightFunction"/any other function name, default function will be used);
-	4. epsilon : Epsilon for default weight function
+	2. connectivity_type : Pixel connectivity type (expected value 4 or 8)
+	3. weight_function : Weight function for fill algorithm (expected value: "DefaultWeightFunction");
+	4. epsilon : Epsilon for default weight function (expected value: small float)
 	5. exponent : Exponent for weight function
+	
+Example:
+	java -jar ImageHoleFiller.jar image.txt 8 DefaultWeightFunction 0.1 2
 
 
-TIME COMPLEXITY:
+FILL ALGORITHM TIME COMPLEXITY:
 	(1) Weight function time complexity is O(1) (since Math.pow complexity is O(1))
 	(2) Calculate the value of a single "hole" pixel time complexity is O(m), where m is the number of boundaries.
 	(3) Calculate value of n "hole" pixels time complexity is O(n*m)
